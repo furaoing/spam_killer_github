@@ -24,8 +24,7 @@ class spam_filter:
         """ import data source from plain text file (routine) """ 
         with open(file_path, 'r', encoding="utf-8") as f:
             lines = f.readlines()
-            fields = lines.pop(0)    #remove the first element, which is the tag row in excel 
-            
+            fields = lines.pop(0)    #remove the first element, which is the tag row in excel     
             field_list = fields.split('\t')
             field_list[0] = field_list[0].strip('\ufeff')
             field_list[-1] = field_list[0].strip('\n')
@@ -43,13 +42,15 @@ class spam_filter:
         return lines
         
     def kw_spam_rm(self):
-        lines = self.kw_batch_spam_rm()
-        txt_string = "".join(lines)
-        
-        filted_basename = '(filted) ' + retrive_basename(self.file_path)
-        filted_dirname = retrive_dirname(self.file_path)
-        path = filted_dirname + '\\' + filted_basename
-        with open(path, 'w') as f:
-            f.write(txt_string)
+        if isinstance(self.file_path, str):
+		    lines = self.kw_batch_spam_rm()
+            txt_string = "".join(lines)
+            filted_basename = '(filted) ' + retrive_basename(self.file_path)
+            filted_dirname = retrive_dirname(self.file_path)
+            path = filted_dirname + '\\' + filted_basename
+            with open(path, 'w') as f:
+                f.write(txt_string)
+		else:
+		    print('Input data type error !')
 
 
