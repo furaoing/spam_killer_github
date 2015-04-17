@@ -49,3 +49,9 @@ def retrive_basename(file_path):
     
 def retrive_dirname(file_path):
     return os.path.dirname(file_path)
+    
+def generate_newpath(prefix, file_path):
+    filted_basename = prefix + retrive_basename(file_path)
+    filted_dirname = retrive_dirname(file_path)
+    path = filted_dirname + '\\' + filted_basename
+    return path

@@ -6,7 +6,7 @@ Created on Thu Apr  9 11:15:49 2015
 """
 
 
-from .lib import kw_spam_detect, read_from_json, retrive_basename, retrive_dirname, len_spam_detect
+from .lib import kw_spam_detect, read_from_json, len_spam_detect, generate_newpath
 
 
 class spam_filter:
@@ -63,20 +63,18 @@ class spam_filter:
         lines = self.kw_batch_spam_rm()
         txt_string = self.fields+"".join(lines)
         
-        filted_basename = '(filted) ' + retrive_basename(self.file_path)
-        filted_dirname = retrive_dirname(self.file_path)
-        path = filted_dirname + '\\' + filted_basename
-        with open(path, 'w') as f:
+        prefix = '(kw_spamfilted) '
+        path = generate_newpath(prefix, self.file_path)
+        with open(path, 'w', encoding="utf-8") as f:
             f.write(txt_string)
             
     def len_spam_rm(self):
         lines = self.len_batch_spam_rm()
         txt_string = self.fields+"".join(lines)
         
-        filted_basename = '(filted) ' + retrive_basename(self.file_path)
-        filted_dirname = retrive_dirname(self.file_path)
-        path = filted_dirname + '\\' + filted_basename
-        with open(path, 'w') as f:
+        prefix = '(len_spamfilted) '
+        path = generate_newpath(prefix, self.file_path)
+        with open(path, 'w', encoding="utf-8") as f:
             f.write(txt_string)
 
 
