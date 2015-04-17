@@ -1,0 +1,7 @@
+1. Regular Expression Spam Filter:
+Tell: 11 digit telephone number
+
+2. Message len filter debug (arabic numerals)
+
+3. Regular Rule:
+Start with #XXX#
