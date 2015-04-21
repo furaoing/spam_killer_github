@@ -53,5 +53,8 @@ def retrive_dirname(file_path):
 def generate_newpath(prefix, file_path):
     filted_basename = prefix + retrive_basename(file_path)
     filted_dirname = retrive_dirname(file_path)
-    path = filted_dirname + '\\' + filted_basename
+    if len(filted_dirname) > 0:
+        path = filted_dirname + '\\' + filted_basename
+    else:
+        path = filted_basename
     return path

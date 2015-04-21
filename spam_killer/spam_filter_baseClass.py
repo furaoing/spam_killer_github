@@ -67,6 +67,7 @@ class spam_filter:
         path = generate_newpath(prefix, self.file_path)
         with open(path, 'w', encoding="utf-8") as f:
             f.write(txt_string)
+        return path
             
     def len_spam_rm(self):
         lines = self.len_batch_spam_rm()
@@ -76,5 +77,5 @@ class spam_filter:
         path = generate_newpath(prefix, self.file_path)
         with open(path, 'w', encoding="utf-8") as f:
             f.write(txt_string)
-
+        return path
 

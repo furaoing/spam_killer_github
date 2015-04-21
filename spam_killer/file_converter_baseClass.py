@@ -7,6 +7,7 @@ Created on Wed Apr 15 17:01:29 2015
 
 
 import xlrd
+import xlsxwriter
 from .lib import retrive_basename, retrive_dirname
 
 
@@ -37,22 +38,48 @@ class converter:
             line = line + '\n' # add the a special character: \n
             lines.append(line)
         str_lines = "".join(lines)
-        return str_lines        
         
+        filted_basename = retrive_basename(self.file_path).replace('xlsx', 'txt')
+        filted_dirname = retrive_dirname(self.file_path)
+        if len(filted_dirname) > 0:
+            path = filted_dirname + '\\' + filted_basename
+        else:
+            path = filted_basename
             
+        with open(path, 'w', encoding="utf-8") as f:
+            f.write(str_lines)
+            
+        return path
+
+    def TABtxt_to_xls_converter(self):
+        filted_basename = retrive_basename(self.file_path).replace('txt', 'xlsx')
+        filted_dirname = retrive_dirname(self.file_path)
+        if len(filted_dirname) > 0:
+            path = filted_dirname + '\\' + filted_basename
+        else:
+            path = filted_basename
+        
+        workbook = xlsxwriter.Workbook(path)  # create a new xlsx file
+        worksheet = workbook.add_worksheet()
+        with open(self.file_path) as f:
+            lines = f.readlines()
+          
+        row = 0
+        for line in lines:
+            str_list = line.split('\t')
+            col = 0
+            for cell_value in str_list:
+                worksheet.write(row, col, cell_value)
+                col += 1
+            row += 1
+        workbook.close()
+        
+        return path
+                      
     def __call__(self):
         if (self.from_ == converter.EXCEL) and (self.to_ == converter.TXT):
-            txt_str = self.xls_to_TABtxt_converter()
-            
-            filted_basename = retrive_basename(self.file_path).replace('xlsx', 'txt')
-            filted_dirname = retrive_dirname(self.file_path)
-            path = filted_dirname + '\\' + filted_basename
-            
-            with open(path, 'w') as f:
-                f.write(txt_str)
-                
-            print('cc')
-        
-        else:
-            print('Error')
+            return self.xls_to_TABtxt_converter()
+       
+        elif (self.from_ == converter.TXT) and (self.to_ == converter.EXCEL):
+            return self.TABtxt_to_xls_converter()
         
