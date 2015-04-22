@@ -64,18 +64,18 @@ class spam_filter:
         txt_string = self.fields+"".join(lines)
         
         prefix = '(kw_spamfilted) '
-        path = generate_newpath(prefix, self.file_path)
-        with open(path, 'w', encoding="utf-8") as f:
+        f_path = generate_newpath(prefix, self.file_path)
+        with open(f_path, 'w', encoding="utf-8") as f:
             f.write(txt_string)
-        return path
+        return f_path
             
     def len_spam_rm(self):
         lines = self.len_batch_spam_rm()
         txt_string = self.fields+"".join(lines)
         
         prefix = '(len_spamfilted) '
-        path = generate_newpath(prefix, self.file_path)
-        with open(path, 'w', encoding="utf-8") as f:
+        f_path = generate_newpath(prefix, self.file_path)
+        with open(f_path, 'w', encoding="utf-8") as f:
             f.write(txt_string)
-        return path
+        return f_path
 

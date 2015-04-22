@@ -42,24 +42,24 @@ class converter:
         filted_basename = retrive_basename(self.file_path).replace('xlsx', 'txt')
         filted_dirname = retrive_dirname(self.file_path)
         if len(filted_dirname) > 0:
-            path = filted_dirname + '\\' + filted_basename
+            f_path = filted_dirname + '\\' + filted_basename
         else:
-            path = filted_basename
+            f_path = filted_basename
             
-        with open(path, 'w', encoding="utf-8") as f:
+        with open(f_path, 'w', encoding="utf-8") as f:
             f.write(str_lines)
             
-        return path
+        return f_path
 
     def TABtxt_to_xls_converter(self):
         filted_basename = retrive_basename(self.file_path).replace('txt', 'xlsx')
         filted_dirname = retrive_dirname(self.file_path)
         if len(filted_dirname) > 0:
-            path = filted_dirname + '\\' + filted_basename
+            f_path = filted_dirname + '\\' + filted_basename
         else:
-            path = filted_basename
+            f_path = filted_basename
         
-        workbook = xlsxwriter.Workbook(path)  # create a new xlsx file
+        workbook = xlsxwriter.Workbook(f_path)  # create a new xlsx file
         worksheet = workbook.add_worksheet()
         with open(self.file_path) as f:
             lines = f.readlines()
@@ -74,7 +74,7 @@ class converter:
             row += 1
         workbook.close()
         
-        return path
+        return f_path
                       
     def __call__(self):
         if (self.from_ == converter.EXCEL) and (self.to_ == converter.TXT):
