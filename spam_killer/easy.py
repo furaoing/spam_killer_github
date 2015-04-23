@@ -10,6 +10,7 @@ from .spam_filter_baseClass import spam_filter
 
 
 def easy(file_path, rule_path):
+    # a pipeline function to operate the original xlsx data file
     excel_to_txt_con = converter(file_path, "Excel", "Txt")
     new_path = excel_to_txt_con()
     

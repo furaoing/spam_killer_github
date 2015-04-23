@@ -61,7 +61,7 @@ class converter:
         
         workbook = xlsxwriter.Workbook(f_path)  # create a new xlsx file
         worksheet = workbook.add_worksheet()
-        with open(self.file_path) as f:
+        with open(self.file_path, 'r', encoding='utf-8') as f:
             lines = f.readlines()
           
         row = 0
