@@ -5,3 +5,5 @@ Tell: 11 digit telephone number
 
 3. Regular Rule:
 Start with #XXX#
+
+4. Repeated Msg Filter
